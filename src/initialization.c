@@ -18,7 +18,6 @@ void initialize_game_information(game_information *info_ptr)
 	gettimeofday(&info_ptr->game_time.now, NULL);
 }
 
-// 乱数生成器の初期化、time(0)は現在時刻
 void initialize_random_generator()
 {
 	srand(CURRENT_TIME);

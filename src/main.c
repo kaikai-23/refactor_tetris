@@ -1,11 +1,3 @@
-// メモリリークの確認
-// #include <libc.h>
-// __attribute__((destructor))
-// static void destructor() {
-//     system("leaks -q a.out");
-// }
-// 
-
 #include "../include/tetris.h"
 
 int main()
