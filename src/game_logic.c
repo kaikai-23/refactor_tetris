@@ -1,4 +1,4 @@
-#include "test.h"
+#include "../include/tetris.h"
 
 static void _set_keyboard_input_timeout()
 {

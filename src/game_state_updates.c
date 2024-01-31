@@ -1,4 +1,4 @@
-#include "test.h"
+#include "../include/tetris.h"
 
 static void _fix_block(const block_data block, char game_board[BOARD_ROWS][BOARD_COLS])
 {

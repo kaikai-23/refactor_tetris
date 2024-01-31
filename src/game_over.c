@@ -1,4 +1,4 @@
-#include "test.h"
+#include "../include/tetris.h"
 
 static void _print_game_board_state(const char game_board[BOARD_ROWS][BOARD_COLS])
 {
