@@ -1,4 +1,4 @@
-#include "tetris.h"
+#include "test.h"
 
 static void _move_block_down(game_information *info_ptr)
 {

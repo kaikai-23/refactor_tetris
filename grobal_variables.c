@@ -1,4 +1,4 @@
-#include "tetris.h"
+#include "test.h"
 
 const block_data block_shapes[7] = {
 	{(char *[]){(char []){0,1,1},

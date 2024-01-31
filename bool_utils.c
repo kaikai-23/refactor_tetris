@@ -1,4 +1,4 @@
-#include "tetris.h"
+#include "test.h"
 
 bool is_outside_of_board(const block_data block, const int i, const int j)
 {

@@ -54,30 +54,6 @@
 // 	int position_col;
 // } block_data;
 
-const block_data block_shapes[7]= {
-	{(char *[]){(char []){0,1,1},
-				(char []){1,1,0},
-				(char []){0,0,0}}, 3},
-	{(char *[]){(char []){1,1,0},
-				(char []){0,1,1}, 
-				(char []){0,0,0}}, 3},
-	{(char *[]){(char []){0,1,0},
-				(char []){1,1,1}, 
-				(char []){0,0,0}}, 3},
-	{(char *[]){(char []){0,0,1},
-				(char []){1,1,1},
-				(char []){0,0,0}}, 3},
-	{(char *[]){(char []){1,0,0},
-				(char []){1,1,1}, 
-				(char []){0,0,0}}, 3},
-	{(char *[]){(char []){1,1},
-				(char []){1,1}}, 2},
-	{(char *[]){(char []){0,0,0,0}, 
-				(char []){1,1,1,1}, 
-				(char []){0,0,0,0}, 
-				(char []){0,0,0,0}}, 4}
-};
-
 
 // typedef struct
 // {
@@ -96,89 +72,89 @@ const block_data block_shapes[7]= {
 // 	game_time_data game_time;
 // } game_information;
 
-void handle_fatal_error()
-{
-	endwin();
-	fprintf(stderr, ERROR_MESSAGE);
-	exit(EXIT_FAILURE);
-}
+// void handle_fatal_error()
+// {
+// 	endwin();
+// 	fprintf(stderr, ERROR_MESSAGE);
+// 	exit(EXIT_FAILURE);
+// }
 
-void free_block_memory(block_data *block_ptr)
-{
-    for (int i = 0; i < block_ptr->block_width; i++)
-		free(block_ptr->block_matrix[i]);
-    free(block_ptr->block_matrix);
-	block_ptr->block_matrix = NULL;
-}
+// void free_block_memory(block_data *block_ptr)
+// {
+//     for (int i = 0; i < block_ptr->block_width; i++)
+// 		free(block_ptr->block_matrix[i]);
+//     free(block_ptr->block_matrix);
+// 	block_ptr->block_matrix = NULL;
+// }
 
-block_data copy_block(block_data src)
-{
-	// srcのメンバ変数の値をdestへコピー
-	block_data dest = {
-		.block_width = src.block_width,
-		.position_row = src.position_row,
-		.position_col = src.position_col
-	};
+// block_data copy_block(block_data src)
+// {
+// 	// srcのメンバ変数の値をdestへコピー
+// 	block_data dest = {
+// 		.block_width = src.block_width,
+// 		.position_row = src.position_row,
+// 		.position_col = src.position_col
+// 	};
 
-	dest.block_matrix = (char**)malloc(src.block_width * sizeof(char*));
-	if (!dest.block_matrix)
-		handle_fatal_error();
-    for (int i = 0; i < src.block_width; i++)
-	{
-		dest.block_matrix[i] = (char*)malloc(src.block_width * sizeof(char));
-		if (!dest.block_matrix[i])
-		{
-			free_block_memory(&dest);
-			handle_fatal_error();
-		}
-		for (int j = 0; j < src.block_width; j++)
-			dest.block_matrix[i][j] = src.block_matrix[i][j];
-    }
-    return (dest);
-}
+// 	dest.block_matrix = (char**)malloc(src.block_width * sizeof(char*));
+// 	if (!dest.block_matrix)
+// 		handle_fatal_error();
+//     for (int i = 0; i < src.block_width; i++)
+// 	{
+// 		dest.block_matrix[i] = (char*)malloc(src.block_width * sizeof(char));
+// 		if (!dest.block_matrix[i])
+// 		{
+// 			free_block_memory(&dest);
+// 			handle_fatal_error();
+// 		}
+// 		for (int j = 0; j < src.block_width; j++)
+// 			dest.block_matrix[i][j] = src.block_matrix[i][j];
+//     }
+//     return (dest);
+// }
 
-void set_keyboard_input_timeout()
-{
-	timeout(KEYBOARD_INPUT_DELAY_MS);
-}
+// void set_keyboard_input_timeout()
+// {
+// 	timeout(KEYBOARD_INPUT_DELAY_MS);
+// }
 
 // void initialize_random_generator()
 // {
 // 	srand(CURRENT_TIME);
 // }
 
-block_data create_new_block()
-{
-	block_data new_block = copy_block(block_shapes[rand() % NUMBER_OF_BLOCK_SHAPES]);
-	new_block.position_col = rand() % (BOARD_COLS - new_block.block_width + 1);
-    new_block.position_row = 0;
+// block_data create_new_block()
+// {
+// 	block_data new_block = copy_block(block_shapes[rand() % NUMBER_OF_BLOCK_SHAPES]);
+// 	new_block.position_col = rand() % (BOARD_COLS - new_block.block_width + 1);
+//     new_block.position_row = 0;
 
-	return (new_block);
-}
+// 	return (new_block);
+// }
 
-bool is_outside_of_board(block_data block, int i, int j)
-{
-	return (block.position_col + j < 0 || block.position_col + j >= BOARD_COLS || block.position_row + i >= BOARD_ROWS);
-}
+// bool is_outside_of_board(block_data block, int i, int j)
+// {
+// 	return (block.position_col + j < 0 || block.position_col + j >= BOARD_COLS || block.position_row + i >= BOARD_ROWS);
+// }
 
-bool is_block_position_occupied(block_data block, int i, int j, char game_board[BOARD_ROWS][BOARD_COLS])
-{
-	return (game_board[block.position_row + i][block.position_col + j]);
-}
+// bool is_block_position_occupied(block_data block, int i, int j, char game_board[BOARD_ROWS][BOARD_COLS])
+// {
+// 	return (game_board[block.position_row + i][block.position_col + j]);
+// }
 
-bool is_block_position_valid(block_data block, char game_board[BOARD_ROWS][BOARD_COLS])
-{
-	for (int i = 0; i < block.block_width; i++) {
-		for (int j = 0; j < block.block_width ; j++){
-			if (block.block_matrix[i][j])
-			{
-				if (is_outside_of_board(block, i, j) || is_block_position_occupied(block, i, j, game_board))
-					return FALSE;
-			}
-		}
-	}
-	return TRUE;
-}
+// bool is_block_position_valid(block_data block, char game_board[BOARD_ROWS][BOARD_COLS])
+// {
+// 	for (int i = 0; i < block.block_width; i++) {
+// 		for (int j = 0; j < block.block_width ; j++){
+// 			if (block.block_matrix[i][j])
+// 			{
+// 				if (is_outside_of_board(block, i, j) || is_block_position_occupied(block, i, j, game_board))
+// 					return FALSE;
+// 			}
+// 		}
+// 	}
+// 	return TRUE;
+// }
 
 // void initialize_game_information(game_information *info_ptr)
 // {
@@ -283,48 +259,48 @@ bool is_block_position_valid(block_data block, char game_board[BOARD_ROWS][BOARD
 4 5 6  =>  8 5 2
 7 8 9      9 6 3
 */
-void rotate_block(block_data block){
-	block_data temp = copy_block(block);
-	int width = block.block_width;
+// void rotate_block(block_data block){
+// 	block_data temp = copy_block(block);
+// 	int width = block.block_width;
 
-	for(int i = 0; i < width ; i++)
-	{
-		for(int j = 0, k = width - 1; j < width ; j++, k--)
-			block.block_matrix[i][j] = temp.block_matrix[k][i];
-	}
-	free_block_memory(&temp);
-}
+// 	for(int i = 0; i < width ; i++)
+// 	{
+// 		for(int j = 0, k = width - 1; j < width ; j++, k--)
+// 			block.block_matrix[i][j] = temp.block_matrix[k][i];
+// 	}
+// 	free_block_memory(&temp);
+// }
 
-bool should_update_block(game_time_data time_data){
-	suseconds_t current_time, previous_time;
+// bool should_update_block(game_time_data time_data){
+// 	suseconds_t current_time, previous_time;
 
-	current_time = time_data.now.tv_sec * MICROSECONDS_PER_SECOND + time_data.now.tv_usec;
-	previous_time = time_data.before_now.tv_sec * MICROSECONDS_PER_SECOND + time_data.before_now.tv_usec;
+// 	current_time = time_data.now.tv_sec * MICROSECONDS_PER_SECOND + time_data.now.tv_usec;
+// 	previous_time = time_data.before_now.tv_sec * MICROSECONDS_PER_SECOND + time_data.before_now.tv_usec;
 
-	return (current_time - previous_time > time_data.interval_time);
-}
+// 	return (current_time - previous_time > time_data.interval_time);
+// }
 
-void fix_block(block_data block, char game_board[BOARD_ROWS][BOARD_COLS])
-{
-	for (int i = 0; i < block.block_width; i++)
-	{
-		for (int j = 0; j < block.block_width; j++)
-		{
-			if(block.block_matrix[i][j])
-				game_board[block.position_row + i][block.position_col + j] = block.block_matrix[i][j];
-		}
-	}
-}
+// void fix_block(block_data block, char game_board[BOARD_ROWS][BOARD_COLS])
+// {
+// 	for (int i = 0; i < block.block_width; i++)
+// 	{
+// 		for (int j = 0; j < block.block_width; j++)
+// 		{
+// 			if(block.block_matrix[i][j])
+// 				game_board[block.position_row + i][block.position_col + j] = block.block_matrix[i][j];
+// 		}
+// 	}
+// }
 
-bool is_oneline_filled(char game_board[BOARD_COLS])
-{
-	for (int x = 0; x < BOARD_COLS; x++)
-	{
-		if(!game_board[x])
-			return FALSE;
-	}
-	return TRUE;
-}
+// bool is_oneline_filled(char game_board[BOARD_COLS])
+// {
+// 	for (int x = 0; x < BOARD_COLS; x++)
+// 	{
+// 		if(!game_board[x])
+// 			return FALSE;
+// 	}
+// 	return TRUE;
+// }
 
 /*
 例えば、
@@ -332,148 +308,148 @@ bool is_oneline_filled(char game_board[BOARD_COLS])
 4 5 6  =>  1 2 3
 7 8 9      4 5 6
 */
-void remap_game_board(int max_row, char game_board[BOARD_ROWS][BOARD_COLS])
-{
-	for (int i = max_row; i >= 1; i--)
-	{
-		for (int j = 0; j < BOARD_COLS; j++)
-			game_board[i][j] = game_board[i - 1][j];
-	}
-	for (int j = 0; j < BOARD_COLS; j++)
-		game_board[0][j] = 0;
-}
+// void remap_game_board(int max_row, char game_board[BOARD_ROWS][BOARD_COLS])
+// {
+// 	for (int i = max_row; i >= 1; i--)
+// 	{
+// 		for (int j = 0; j < BOARD_COLS; j++)
+// 			game_board[i][j] = game_board[i - 1][j];
+// 	}
+// 	for (int j = 0; j < BOARD_COLS; j++)
+// 		game_board[0][j] = 0;
+// }
 
-void update_game_score(int *score, int lines_cleared)
-{
-	*score += SCORE_PER_CELL * BOARD_COLS * lines_cleared;
-}
+// void update_game_score(int *score, int lines_cleared)
+// {
+// 	*score += SCORE_PER_CELL * BOARD_COLS * lines_cleared;
+// }
 
-void update_interval_time(suseconds_t *interval_time, suseconds_t *drop_speed_up, int lines_cleared)
-{
-	*interval_time -= *drop_speed_up * lines_cleared;
-}
+// void update_interval_time(suseconds_t *interval_time, suseconds_t *drop_speed_up, int lines_cleared)
+// {
+// 	*interval_time -= *drop_speed_up * lines_cleared;
+// }
 
-void respown_new_block(block_data *block_ptr)
-{
-	block_data new_block = create_new_block();
+// void respown_new_block(block_data *block_ptr)
+// {
+// 	block_data new_block = create_new_block();
 
-	free_block_memory(block_ptr);
-	*block_ptr = new_block;
-}
+// 	free_block_memory(block_ptr);
+// 	*block_ptr = new_block;
+// }
 
-void update_game_information(game_information *info_ptr, int lines_cleared)
-{
-	if (lines_cleared > 0)
-	{
-		update_game_score(&info_ptr->score, lines_cleared);
-		update_interval_time(&info_ptr->game_time.interval_time, &info_ptr->game_time.drop_speed_up, lines_cleared);
-	}
-}
+// void update_game_information(game_information *info_ptr, int lines_cleared)
+// {
+// 	if (lines_cleared > 0)
+// 	{
+// 		update_game_score(&info_ptr->score, lines_cleared);
+// 		update_interval_time(&info_ptr->game_time.interval_time, &info_ptr->game_time.drop_speed_up, lines_cleared);
+// 	}
+// }
 
-int clear_and_count_filled_lines(game_information *info_ptr)
-{
-    int lines_cleared = 0;
-    for (int x = 0; x < BOARD_ROWS; x++)
-	{
-        if (is_oneline_filled(info_ptr->game_board[x]))
-		{
-            remap_game_board(x, info_ptr->game_board);
-            lines_cleared++;
-        }
-    }
-    return lines_cleared;
-}
+// int clear_and_count_filled_lines(game_information *info_ptr)
+// {
+//     int lines_cleared = 0;
+//     for (int x = 0; x < BOARD_ROWS; x++)
+// 	{
+//         if (is_oneline_filled(info_ptr->game_board[x]))
+// 		{
+//             remap_game_board(x, info_ptr->game_board);
+//             lines_cleared++;
+//         }
+//     }
+//     return lines_cleared;
+// }
 
-void update_game_after_block_fix(game_information *info_ptr)
-{
-	fix_block(info_ptr->current_block, info_ptr->game_board);
-	int lines_cleared = clear_and_count_filled_lines(info_ptr);
-	update_game_information(info_ptr, lines_cleared);
-	respown_new_block(&info_ptr->current_block);
-	if (!is_block_position_valid(info_ptr->current_block, info_ptr->game_board))
-		info_ptr->is_game_active = FALSE;
-}
+// void update_game_after_block_fix(game_information *info_ptr)
+// {
+// 	fix_block(info_ptr->current_block, info_ptr->game_board);
+// 	int lines_cleared = clear_and_count_filled_lines(info_ptr);
+// 	update_game_information(info_ptr, lines_cleared);
+// 	respown_new_block(&info_ptr->current_block);
+// 	if (!is_block_position_valid(info_ptr->current_block, info_ptr->game_board))
+// 		info_ptr->is_game_active = FALSE;
+// }
 
 
-void move_block_down(game_information *info_ptr)
-{
-	block_data temp = copy_block(info_ptr->current_block);
-	temp.position_row++;
-    if (is_block_position_valid(temp, info_ptr->game_board))
-        info_ptr->current_block.position_row++;
-    else
-        update_game_after_block_fix(info_ptr);
-    free_block_memory(&temp);
-}
+// void move_block_down(game_information *info_ptr)
+// {
+// 	block_data temp = copy_block(info_ptr->current_block);
+// 	temp.position_row++;
+//     if (is_block_position_valid(temp, info_ptr->game_board))
+//         info_ptr->current_block.position_row++;
+//     else
+//         update_game_after_block_fix(info_ptr);
+//     free_block_memory(&temp);
+// }
 
-void move_block_right(game_information *info_ptr)
-{
-    block_data temp = copy_block(info_ptr->current_block);
-    temp.position_col++;
-    if (is_block_position_valid(temp, info_ptr->game_board))
-        info_ptr->current_block.position_col++;
-    free_block_memory(&temp);
-}
+// void move_block_right(game_information *info_ptr)
+// {
+//     block_data temp = copy_block(info_ptr->current_block);
+//     temp.position_col++;
+//     if (is_block_position_valid(temp, info_ptr->game_board))
+//         info_ptr->current_block.position_col++;
+//     free_block_memory(&temp);
+// }
 
-void move_block_left(game_information *info_ptr)
-{
-    block_data temp = copy_block(info_ptr->current_block);
-    temp.position_col--;
-    if (is_block_position_valid(temp, info_ptr->game_board))
-        info_ptr->current_block.position_col--;
-    free_block_memory(&temp);
-}
+// void move_block_left(game_information *info_ptr)
+// {
+//     block_data temp = copy_block(info_ptr->current_block);
+//     temp.position_col--;
+//     if (is_block_position_valid(temp, info_ptr->game_board))
+//         info_ptr->current_block.position_col--;
+//     free_block_memory(&temp);
+// }
 
-void move_block_rotate(game_information *info_ptr)
-{
-    block_data temp = copy_block(info_ptr->current_block);
-	rotate_block(temp);
-	if (is_block_position_valid(temp, info_ptr->game_board))
-		rotate_block(info_ptr->current_block);
-	free_block_memory(&temp);
-}
+// void move_block_rotate(game_information *info_ptr)
+// {
+//     block_data temp = copy_block(info_ptr->current_block);
+// 	rotate_block(temp);
+// 	if (is_block_position_valid(temp, info_ptr->game_board))
+// 		rotate_block(info_ptr->current_block);
+// 	free_block_memory(&temp);
+// }
 
-void handle_key_input(game_information *info_ptr, int pressed_key)
-{
-	switch (pressed_key)
-	{
-	case DOWN_KEY:
-		move_block_down(info_ptr);
-		break;
-	case RIGHT_KEY:
-		move_block_right(info_ptr);
-		break;
-	case LEFT_KEY:
-		move_block_left(info_ptr);
-		break;
-	case ROTATE_KEY:
-		move_block_rotate(info_ptr);
-		break;
-	}
-}
+// void handle_key_input(game_information *info_ptr, int pressed_key)
+// {
+// 	switch (pressed_key)
+// 	{
+// 	case DOWN_KEY:
+// 		move_block_down(info_ptr);
+// 		break;
+// 	case RIGHT_KEY:
+// 		move_block_right(info_ptr);
+// 		break;
+// 	case LEFT_KEY:
+// 		move_block_left(info_ptr);
+// 		break;
+// 	case ROTATE_KEY:
+// 		move_block_rotate(info_ptr);
+// 		break;
+// 	}
+// }
 
-void handle_free_fall(game_information *info_ptr)
-{
-	gettimeofday(&info_ptr->game_time.now, NULL);
-	if (should_update_block(info_ptr->game_time))
-	{
-		move_block_down(info_ptr);
-		gettimeofday(&info_ptr->game_time.before_now, NULL);
-	}
-}
+// void handle_free_fall(game_information *info_ptr)
+// {
+// 	gettimeofday(&info_ptr->game_time.now, NULL);
+// 	if (should_update_block(info_ptr->game_time))
+// 	{
+// 		move_block_down(info_ptr);
+// 		gettimeofday(&info_ptr->game_time.before_now, NULL);
+// 	}
+// }
 
-void process_playing_tetris(game_information *info_ptr)
-{
-	set_keyboard_input_timeout();
-	while(info_ptr->is_game_active)
-	{
-		int pressed_key = getch();
-		if(pressed_key != ERR)
-			handle_key_input(info_ptr, pressed_key);
-		handle_free_fall(info_ptr);
-		display_game_state(info_ptr->current_block, info_ptr->score, info_ptr->game_board);
-	}
-}
+// void process_playing_tetris(game_information *info_ptr)
+// {
+// 	set_keyboard_input_timeout();
+// 	while(info_ptr->is_game_active)
+// 	{
+// 		int pressed_key = getch();
+// 		if(pressed_key != ERR)
+// 			handle_key_input(info_ptr, pressed_key);
+// 		handle_free_fall(info_ptr);
+// 		display_game_state(info_ptr->current_block, info_ptr->score, info_ptr->game_board);
+// 	}
+// }
 
 
 int main()
