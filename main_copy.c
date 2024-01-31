@@ -6,6 +6,9 @@
 // }
 // 
 
+// テスト
+#include "test.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -14,8 +17,8 @@
 #include <stdbool.h>
 #include <string.h>
 
-#define BOARD_ROWS 20
-#define BOARD_COLS 15
+// #define BOARD_ROWS 20
+// #define BOARD_COLS 15
 #define TRUE 1
 #define FALSE 0
 
@@ -32,10 +35,10 @@
 
 #define GAME_TITLE "42 Tetris"
 
-#define BLOCK_CHAR '#'
-#define BLANK_CHAR '.'
+// #define BLOCK_CHAR '#'
+// #define BLANK_CHAR '.'
 
-#define GAME_OVER_MESSAGE "Game over!"
+// #define GAME_OVER_MESSAGE "Game over!"
 
 #define LEFT_KEY 'a'
 #define RIGHT_KEY 'd'
@@ -246,33 +249,33 @@ void display_game_state(block_data block, int score, char game_board[BOARD_ROWS]
 	print_score(score);
 }
 
-void print_game_board_state(char game_board[BOARD_ROWS][BOARD_COLS])
-{
-    for (int x = 0; x < BOARD_ROWS; x++)
-    {
-        for (int y = 0; y < BOARD_COLS; y++)
-            printf("%c ", game_board[x][y] ? BLOCK_CHAR : BLANK_CHAR);
-        printf("\n");
-    }
-}
+// void print_game_board_state(char game_board[BOARD_ROWS][BOARD_COLS])
+// {
+//     for (int x = 0; x < BOARD_ROWS; x++)
+//     {
+//         for (int y = 0; y < BOARD_COLS; y++)
+//             printf("%c ", game_board[x][y] ? BLOCK_CHAR : BLANK_CHAR);
+//         printf("\n");
+//     }
+// }
 
-void print_game_over_message()
-{
-    printf("\n%s\n", GAME_OVER_MESSAGE);
-}
+// void print_game_over_message()
+// {
+//     printf("\n%s\n", GAME_OVER_MESSAGE);
+// }
 
-void print_final_score(int score)
-{
-    printf("\nScore: %d\n", score);
-}
+// void print_final_score(int score)
+// {
+//     printf("\nScore: %d\n", score);
+// }
 
-void display_game_result(int score, char game_board[BOARD_ROWS][BOARD_COLS])
-{
-    print_game_board_state(game_board);
-    print_game_over_message();
-    print_final_score(score);
-}
-
+// void display_game_result(int score, char game_board[BOARD_ROWS][BOARD_COLS])
+// {
+//     print_game_board_state(game_board);
+//     print_game_over_message();
+//     print_final_score(score);
+// }
+void display_game_result(int score, char game_board[BOARD_ROWS][BOARD_COLS]);
 
 /*
 90度時計回りに回転
@@ -472,6 +475,7 @@ void process_playing_tetris(game_information *info_ptr)
 		display_game_state(info_ptr->current_block, info_ptr->score, info_ptr->game_board);
 	}
 }
+
 
 int main()
 {

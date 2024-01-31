@@ -58,40 +58,40 @@ typedef struct
 } game_information;
 
 // grobal_variables.c
-extern const block_data block_shapes[7];
+// extern const block_data block_shapes[7];
 
 // initialization.c
-void initialize_random_generator();
-void initialize_game_information(game_information *info_ptr);
+// void initialize_random_generator();
+// void initialize_game_information(game_information *info_ptr);
 
 // display_game_state.c
-void display_game_state(const block_data block, const int score, const char game_board[BOARD_ROWS][BOARD_COLS]);
+// void display_game_state(const block_data block, const int score, const char game_board[BOARD_ROWS][BOARD_COLS]);
 
 // game_logic.c
-void process_playing_tetris(game_information *info_ptr);
+// void process_playing_tetris(game_information *info_ptr);
 
 // bool_utils.c
-bool is_outside_of_board(const block_data block, const int i, const int j);
-bool is_block_position_occupied(const block_data block, const int i, const int j, const char game_board[BOARD_ROWS][BOARD_COLS]);
-bool is_block_position_valid(const block_data block, const char game_board[BOARD_ROWS][BOARD_COLS]);
-bool should_update_block(const game_time_data time_data);
+// bool is_outside_of_board(const block_data block, const int i, const int j);
+// bool is_block_position_occupied(const block_data block, const int i, const int j, const char game_board[BOARD_ROWS][BOARD_COLS]);
+// bool is_block_position_valid(const block_data block, const char game_board[BOARD_ROWS][BOARD_COLS]);
+// bool should_update_block(const game_time_data time_data);
 
 // utility.c
-void handle_fatal_error();
-block_data copy_block(const block_data src);
-void respown_new_block(block_data *block_ptr);
-void free_block_memory(block_data *block_ptr);
-block_data create_new_block();
-void clear_screen();
+// void handle_fatal_error();
+// block_data copy_block(const block_data src);
+// void respown_new_block(block_data *block_ptr);
+// void free_block_memory(block_data *block_ptr);
+// block_data create_new_block();
+// void clear_screen();
 
 // ゲームオーバー（game_over.c）
 void display_game_result(int score, char game_board[BOARD_ROWS][BOARD_COLS]);
 
 // game_hundling.c
-void handle_free_fall(game_information *info_ptr);
-void handle_key_input(game_information *info_ptr, int pressed_key);
+// void handle_free_fall(game_information *info_ptr);
+// void handle_key_input(game_information *info_ptr, int pressed_key);
 
 // game_state_updates.c
-void update_game_after_block_fix(game_information *info_ptr);
+// void update_game_after_block_fix(game_information *info_ptr);
 
 #endif
