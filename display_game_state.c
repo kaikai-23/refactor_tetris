@@ -1,4 +1,4 @@
-#include "tetris.h"
+#include "test.h"
 
 static void _copy_block_to_buffer(const block_data block, char buffer[BOARD_ROWS][BOARD_COLS])
 {

@@ -1,4 +1,4 @@
-#include "tetris.h"
+#include "test.h"
 
 void initialize_game_information(game_information *info_ptr)
 {
