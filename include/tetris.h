@@ -9,26 +9,32 @@
 #include <stdbool.h>
 #include <string.h>
 
-
 #define TRUE 1
 #define FALSE 0
+
 #define BOARD_ROWS 20
 #define BOARD_COLS 15
+
 #define LEFT_KEY 'a'
 #define RIGHT_KEY 'd'
 #define ROTATE_KEY 'w'
 #define DOWN_KEY 's'
+
 #define BLOCK_CHAR '#'
 #define BLANK_CHAR '.'
 
 #define CURRENT_TIME time(0)
+
 #define NUMBER_OF_BLOCK_SHAPES 7
-#define KEYBOARD_INPUT_DELAY_MS 1
 #define FIRST_SCORE 0
+#define SCORE_PER_CELL 100
+
+#define KEYBOARD_INPUT_DELAY_MS 1
+
 #define MICROSECONDS_PER_SECOND 1000000
 #define INTERVAL_TIME 400000
 #define DROP_SPEED_UP 1000
-#define SCORE_PER_CELL 100
+
 #define ERROR_MESSAGE "致命的なエラーが発生しました。プログラムを終了します。\n"
 #define GAME_TITLE "42 Tetris"
 #define GAME_OVER_MESSAGE "Game over!"
@@ -58,7 +64,6 @@ typedef struct
 	game_time_data game_time;
 } game_information;
 
-
 #include "global_variables.h"
 #include "initialization.h"
 #include "display_game_state.h"
@@ -70,4 +75,3 @@ typedef struct
 #include "game_state_updates.h"
 
 #endif
-

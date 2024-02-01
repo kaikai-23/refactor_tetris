@@ -42,7 +42,7 @@ static void _print_score(const int score)
 
 void display_game_state(const block_data block, const int score, const char game_board[BOARD_ROWS][BOARD_COLS])
 {
-	char buffer[BOARD_ROWS][BOARD_COLS] = {0};
+	char buffer[BOARD_ROWS][BOARD_COLS] = {{0}};
 	_copy_block_to_buffer(block, buffer);
 	_clear_screen();
 	_print_game_title();
